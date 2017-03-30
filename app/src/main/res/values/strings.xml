@@ -5,7 +5,7 @@
     <string name="areYouSure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="myName">Your name: </string>
-    <string name="welcomeBack">Your name: </string>
+    <string name="enterName">Your name: </string>
+    <string name="welcomeBack">Welcome Back </string>
 
 </resources>
