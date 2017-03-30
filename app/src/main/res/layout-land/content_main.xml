@@ -101,12 +101,6 @@
                 android:gravity="right"
                 android:weightSum="100">
                 <Button
-                    android:id="@+id/clearButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:text="Clear" />
-                <Button
                     android:id="@+id/removeButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
