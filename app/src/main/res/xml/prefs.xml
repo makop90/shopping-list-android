@@ -3,7 +3,6 @@
 
     <EditTextPreference
         android:key="name"
-        android:defaultValue="@string/enterName"
         android:summary="Enter your name"
         android:title="Name" />
 

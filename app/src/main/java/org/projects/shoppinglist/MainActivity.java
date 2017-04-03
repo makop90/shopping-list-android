@@ -1,6 +1,7 @@
 package org.projects.shoppinglist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,9 +23,11 @@ public class MainActivity extends AppCompatActivity implements MyDialogFragment.
 
     public ArrayAdapter<Product> adapter;
     public ListView listView;
+    private static final int INTENT_SETTINGS_ID = 1;
     public ArrayList<Product> bag = new ArrayList<Product>();
     public static MyDialogFragment dialog;
     public static Context context;
+    public String name = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements MyDialogFragment.
                 adapter.notifyDataSetChanged();
             }
         });
+
+        name = PreferencesFragment.getName(this);
+        String message = "Welcome back "+name;
+        Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
@@ -80,11 +89,14 @@ public class MainActivity extends AppCompatActivity implements MyDialogFragment.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings: {
-                return true;
+                Intent intent = new Intent(this,SettingsActivity.class);
+                startActivityForResult(intent,INTENT_SETTINGS_ID);
+                break;
             }
             case R.id.item_delete: {
                 dialog = new MyDialog();
                 dialog.show(getFragmentManager(), "MyFragment");
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
@@ -128,6 +140,18 @@ public class MainActivity extends AppCompatActivity implements MyDialogFragment.
                     "Canceled", Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==INTENT_SETTINGS_ID) //the code means we came back from settings
+        {
+            String name = PreferencesFragment.getName(this);
+            String message = "Welcome, "+name;
+            Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
+            toast.show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
